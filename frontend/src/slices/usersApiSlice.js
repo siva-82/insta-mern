@@ -26,8 +26,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             query:()=>({
                 url: `${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/logout`, 
                 method:'POST',
-                credentials: "include", 
-                mode: 'cors',
+              
             })
         }),
         register:builder.mutation({
@@ -35,8 +34,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}${USERS_URL}`,
                 method:'POST',
                 body:data,
-                credentials: "include", 
-                mode: 'cors',
+                
             })
         })
     })

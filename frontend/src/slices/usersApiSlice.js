@@ -6,7 +6,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
         getUsers:builder.query({
             query:()=>({
-                url: `${USERS_URL}/getUsers`, 
+                url: `https://insta-world-web.onrender.com/${USERS_URL}/getUsers`, 
                 method:'GET',
                 credentials: "include", 
                 mode: 'cors',
@@ -14,7 +14,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         login: builder.mutation({
             query: (data)=>({
-                url:`${USERS_URL}/auth`,
+                url:`https://insta-world-web.onrender.com/${USERS_URL}/auth`,
                 method:'POST',
                 body:data,
                 credentials: "include", 

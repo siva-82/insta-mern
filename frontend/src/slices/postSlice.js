@@ -56,9 +56,6 @@ export const postApiSlice = apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}${POSTS_URL}/${data.postId}/comments`,
                 method:'POST',
                 body:data,
-                credentials: "include",
-                mode: 'cors',              
-                
             }),
             invalidatesTags:['Posts']
         })

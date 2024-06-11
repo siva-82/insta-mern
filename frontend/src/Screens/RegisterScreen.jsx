@@ -47,7 +47,7 @@ const Register = () => {
 
   return (
     <FormContainer>
-      <h1>Sign up interact with world</h1>
+      <h1>Sign up & interact with world</h1>
       <Form onSubmit={submitHandler}>
       <Form.Group className='my-2' controlId='email'>
         <Form.Control type='email' placeholder='Enter Email' value={email} onChange={ (e) => setEmail(e.target.value)}></Form.Control>

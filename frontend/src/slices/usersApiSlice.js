@@ -8,7 +8,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             query:()=>({
                 url: `${process.env.REACT_APP_BACKEND_URL}/api/users/getUsers`, 
                 method:'GET',
-               credentials: "include" 
+               
                 
             })
         }),

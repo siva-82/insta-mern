@@ -6,7 +6,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
         getUsers:builder.query({
             query:()=>({
-                url: `${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/getUsers`, 
+                url: `${USERS_URL}/getUsers`, 
                 method:'GET',
                 credentials: "include", 
                 mode: 'cors',
@@ -14,7 +14,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         login: builder.mutation({
             query: (data)=>({
-                url:`${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/auth`,
+                url:`${USERS_URL}/auth`,
                 method:'POST',
                 body:data,
                 credentials: "include", 

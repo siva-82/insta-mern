@@ -57,6 +57,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
                 method:'POST',
                 body:data,
                 credentials: "include",
+                mode: 'cors',              
                 
             }),
             invalidatesTags:['Posts']

@@ -7,7 +7,9 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         getUsers:builder.query({
             query:()=>({
                 url: `${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/getUsers`, 
-                method:'GET'
+                method:'GET',
+                credentials: "include", 
+                mode: 'cors',
             })
         }),
         login: builder.mutation({
@@ -15,13 +17,17 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/auth`,
                 method:'POST',
                 body:data,
+                credentials: "include", 
+                mode: 'cors',
 
             })
         }),
         logout:builder.mutation({
             query:()=>({
                 url: `${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/logout`, 
-                method:'POST'
+                method:'POST',
+                credentials: "include", 
+                mode: 'cors',
             })
         }),
         register:builder.mutation({
@@ -29,6 +35,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}${USERS_URL}`,
                 method:'POST',
                 body:data,
+                credentials: "include", 
+                mode: 'cors',
             })
         })
     })

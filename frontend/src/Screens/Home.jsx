@@ -125,6 +125,7 @@ const Home = () => {
                 id="input"
                 className="me-2"
                 type="file"
+                required="true"
                 value={null}
                 onChange={(e) => setImage(e.target.files[0])}
               />{" "}

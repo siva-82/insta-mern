@@ -30,39 +30,22 @@ const Home = () => {
   const [description, setDescription] = useState();
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
-
-  // console.log("post", posts);
-
   
-  // useEffect(() => {
-  //   db.collection('posts')
-  //     .orderBy('timestamp', 'desc')
-  //     .onSnapshot((snapshot) => {
-  //       setPsts(
-  //         snapshot.docs.map((doc) => ({
-  //           id: doc.id,
-  //           post: doc.data(),
-  //         }))
-  //       );
-  //     });
-  // }, []);
-  
-
  
   const logoutHandler = async () => {
-    console.log("logoutHandler");
+  
     try {
       const res = await logout();
-      console.log("logoutres", res);
+      
       dispatch(logoutCredentials());
       navigate("/home");
     } catch (error) {}
   };
   const sendPost = async (e) => {
     e.preventDefault();
-    console.log("sendPost");
+    
 
-    //https://www.youtube.com/watch?v=e0A_WcITwFE&ab_channel=CodeWithYousaf
+    
 
     let formData = new FormData();
     formData.append("userName", userInfo.name);
@@ -72,15 +55,10 @@ const Home = () => {
     formData.append("description", description);
     formData.append("image", image);
 
-    // addPost(formData)
-
-    // for (let [key, value] of formData) {
-    //     console.log("formdataloop",`${key}: ${value}`)
-    //   }
+  
     try {
       const res = await addPost(formData).unwrap();
-      console.log(res);
-      // console.log("submitHandler res try" + res);
+      
     } catch (err) {
       console.log(err?.data?.message || err);
     }
@@ -173,7 +151,7 @@ const Home = () => {
 
       <div
         className="  position-fixed end-0"
-        style={{ height: "-webkit-fill-available", width: "300px" }}
+        style={{ height: "-webkit-fill-available", width: "300px",background:'white' }}
       >
         <div
           className=" h-100 d-flex flex-column justify-content-between align-self-end"

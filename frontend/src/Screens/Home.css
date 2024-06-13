@@ -130,7 +130,17 @@
       display: block !important;
     }
   }
-
+  @media (min-width:481px) and (max-width:700px){
+    .nav__postContainer{
+      display: none;
+    }
+    .home__chatConatainer{
+      display: none;
+    }
+    .nav__buttons{
+      display: block !important;
+    }
+  }
   @media (min-width:481px) and (max-width:768px){
     .nav__buttons{
       display: block;

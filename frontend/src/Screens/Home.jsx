@@ -50,16 +50,19 @@ const Home = () => {
   // }, []);
 
   const logoutHandler = async () => {
-    console.log("logoutHandler");
+  
     try {
       const res = await logout();
-      console.log("logoutres", res);
+      
       dispatch(logoutCredentials());
       navigate("/home");
     } catch (error) {}
   };
   const sendPost = async (e) => {
     e.preventDefault();
+    
+
+    
 
     let formData = new FormData();
     formData.append("userName", userInfo.name);
@@ -69,10 +72,10 @@ const Home = () => {
     formData.append("description", description);
     formData.append("image", image);
 
+  
     try {
       const res = await addPost(formData).unwrap();
-      console.log(res);
-      // console.log("submitHandler res try" + res);
+      
     } catch (err) {
       console.log(err?.data?.message || err);
     }
@@ -122,6 +125,7 @@ const Home = () => {
                 id="input"
                 className=" me-2"
                 type="file"
+                required="true"
                 value={null}
                 onChange={(e) => setImage(e.target.files[0])}
               />
@@ -245,7 +249,7 @@ const Home = () => {
       }
       <div
         className=" home__chatConatainer position-fixed end-0"
-        style={{ height: "-webkit-fill-available", width: "300px" }}
+        style={{ height: "-webkit-fill-available", width: "300px",background:'white' }}
       >
         <div
           className=" h-100 d-flex flex-column justify-content-between align-self-end"

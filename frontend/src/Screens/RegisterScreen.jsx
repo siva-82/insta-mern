@@ -81,7 +81,7 @@ const Register = () => {
 
   return (
     <FormContainer>
-      <h1>Sign up interact with world</h1>
+      <h1>Sign up & interact with world</h1>
       <Form onSubmit={submitHandler}>
       <Form.Group className='my-2' controlId='name'>
         <Form.Control type='Name' placeholder='Enter Name' value={name} onChange={ (e) => setName(e.target.value)}></Form.Control>

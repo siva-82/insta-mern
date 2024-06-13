@@ -9,14 +9,14 @@ export const postApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
         getPosts: builder.query({
             query: ()=>({
-                url:`${REACT_APP_BACKEND_URL}${POSTS_URL}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}${POSTS_URL}`,
                 method:'GET',
             }),
             providesTags:['Posts']
         }),
         getSinglePost: builder.query({
             query: (id)=>({
-                url:`${REACT_APP_BACKEND_URL}${POSTS_URL}/${id}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}${POSTS_URL}/${id}`,
                 method:'GET',
             })
         
@@ -24,7 +24,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
 
         addPost:builder.mutation({
             query:(data)=>({
-                url:`${REACT_APP_BACKEND_URL}${CREATE_POST_URL}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}${CREATE_POST_URL}`,
                 method:'POST',
                 body:data,
                 formData:true                                 
@@ -35,7 +35,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
 
         editPost:builder.mutation({
             query:({id,data})=>({
-                url: `${REACT_APP_BACKEND_URL}/api/upload/${id}`, 
+                url: `${process.env.REACT_APP_BACKEND_URL}/api/upload/${id}`, 
                 method:'PUT',
                 body:data,              
 
@@ -45,7 +45,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
         }),
         deletePost:builder.mutation({
             query:(id)=>({
-                url:`${REACT_APP_BACKEND_URL}/api/upload/${id}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/upload/${id}`,
                 method:'DELETE',
             }),
             invalidatesTags:['Posts']
@@ -53,7 +53,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
         }),
         sendComment:builder.mutation({
             query:(data)=>({
-                url:`${REACT_APP_BACKEND_URL}${POSTS_URL}/${data.postId}/comments`,
+                url:`${process.env.REACT_APP_BACKEND_URL}${POSTS_URL}/${data.postId}/comments`,
                 method:'POST',
                 body:data,
                 credentials: "include",

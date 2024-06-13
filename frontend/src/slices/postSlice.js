@@ -3,7 +3,7 @@ const POSTS_URL='/api/posts'
 const CREATE_POST_URL='/api/upload';
 
 
-console.log('usersApiSlice');
+
 export const postApiSlice = apiSlice.injectEndpoints({
     
     endpoints:(builder)=>({

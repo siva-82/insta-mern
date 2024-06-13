@@ -29,7 +29,7 @@ console.log(email,password)
 const registerUser = asyncHandler(async(req,res)=>{
     
     const {name, userName,email, password} =req.body;
-    
+    console.log(req.body)
     // const userExist = await User.findOne({$or: [ { email: email },{ userName: userName }]})
      const userExist = await User.findOne({email})
     //  console.log(userExist)
@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async(req,res)=>{
     }
 
     const user= await User.create({
-        name,userName,email,password
+        name,userName:name,email,password
     })
 
     if(user){

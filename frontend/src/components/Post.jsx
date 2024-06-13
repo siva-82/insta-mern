@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
+import '../Screens/Home.css'
 import { useDeletePostMutation } from "../slices/postSlice";
 import { useSendCommentMutation } from "../slices/postSlice";
 import Confirm from "./utils/Confirm";
 import { useNavigate } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import { Offcanvas, Spinner } from "react-bootstrap";
 
 const Post = ({ post }) => {
   const { userInfo, isLoadingUser } = useSelector((state) => state.auth);
@@ -71,6 +71,7 @@ const Post = ({ post }) => {
           deletePostHandler={deletePostHandler}
         />
       )}
+      
       <div className=" ">
         <div className="post__nameField">
           <div className="post__avatarName">
@@ -91,7 +92,7 @@ const Post = ({ post }) => {
                 value={post}
                 onClick={() => deleteHandler(post._id)}
               >
-                Delete
+                {!deletePostLoading ? "Delete":(<div class="deleting">...</div>)}
               </div>
             </div>
           )}

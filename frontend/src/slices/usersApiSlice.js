@@ -1,7 +1,7 @@
 import { apiSlice } from "./apiSlice";
 const USERS_URL='/api/users';
 
-console.log('usersApiSlice');
+
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
         getUsers:builder.query({
@@ -26,7 +26,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         register:builder.mutation({
             query:(data)=>({
-                url:`${USERS_URL}`,
+                url:`/api/upload/register`,
+                method:'POST',
+                body:data,
+            })
+        }),
+        registerUser:builder.mutation({
+            query:(data)=>({
+                url:`${USERS_URL}/`,
                 method:'POST',
                 body:data,
             })
@@ -35,4 +42,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     
 })
 
-export const {useLoginMutation, useLogoutMutation,useRegisterMutation,useGetUsersQuery } = usersApiSlice;
+export const {useLoginMutation, useLogoutMutation,useRegisterUserMutation,useRegisterMutation,useGetUsersQuery } = usersApiSlice;

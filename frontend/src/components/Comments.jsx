@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const Comments = (post) => {
-  console.log('post?.comments?.length',post?.comments?.length,post?.comments?.length ==0)
     const [showComment, setShowComment] = useState(false);
 
     return (

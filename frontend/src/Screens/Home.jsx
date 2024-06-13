@@ -12,7 +12,7 @@ import { useAddPostMutation } from "../slices/postSlice";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logoutCredentials } from "../slices/authSlice";
 import Posts from "../components/Posts";
-
+import { useRef } from "react";
 
 // import { db } from '../firebase';
 // import firebase from 'firebase';
@@ -26,14 +26,16 @@ const Home = () => {
     useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const ref = useRef();
 
   const [description, setDescription] = useState();
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
+  const [showPost,setShowPost]=useState(false)
+  const [showChat,setShowChat]=useState(false)
 
-  // console.log("post", posts);
+ 
 
-  
   // useEffect(() => {
   //   db.collection('posts')
   //     .orderBy('timestamp', 'desc')
@@ -46,9 +48,7 @@ const Home = () => {
   //       );
   //     });
   // }, []);
-  
 
- 
   const logoutHandler = async () => {
     console.log("logoutHandler");
     try {
@@ -60,9 +60,6 @@ const Home = () => {
   };
   const sendPost = async (e) => {
     e.preventDefault();
-    console.log("sendPost");
-
-    //https://www.youtube.com/watch?v=e0A_WcITwFE&ab_channel=CodeWithYousaf
 
     let formData = new FormData();
     formData.append("userName", userInfo.name);
@@ -72,11 +69,6 @@ const Home = () => {
     formData.append("description", description);
     formData.append("image", image);
 
-    // addPost(formData)
-
-    // for (let [key, value] of formData) {
-    //     console.log("formdataloop",`${key}: ${value}`)
-    //   }
     try {
       const res = await addPost(formData).unwrap();
       console.log(res);
@@ -87,9 +79,9 @@ const Home = () => {
     setTitle("");
     setDescription("");
     setImage(null);
+    ref.current.value = "";
   };
 
- 
   return (
     <>
       <div className="app__header">
@@ -98,7 +90,11 @@ const Home = () => {
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
-        <div style={{}}>
+        {<div className="nav__buttons d-flex align-items-center">
+          <button className="btn btn-secondary mx-2" style={{paddingTop:"0px",paddingBottom:"0px"}} onClick={()=>setShowPost(prev=>!prev)}>Post</button>
+          <button className="btn btn-secondary" style={{paddingTop:"0px",paddingBottom:"0px"}} onClick={()=>setShowChat(prev=>!prev)}>Chat</button>
+          </div>}
+        <div className="nav__postContainer" style={{}}>
           <form
             className="d-flex justify-cotent-center align-items-center"
             action=""
@@ -122,18 +118,19 @@ const Home = () => {
             ></input>
             <div className="d-flex my-3">
               <input
+                ref={ref}
                 id="input"
-                className="me-2"
+                className=" me-2"
                 type="file"
                 value={null}
                 onChange={(e) => setImage(e.target.files[0])}
-              />{" "}
+              />
             </div>
             <button
               className="btn btn-secondary"
               style={{ borderRadius: "0px" }}
             >
-               {!sendPostLoading ? (
+              {!sendPostLoading ? (
                 "Post"
               ) : (
                 <Spinner
@@ -168,10 +165,86 @@ const Home = () => {
           </div>
         )}
       </div>
-  
-
+      { (
+        <Offcanvas show={showChat} onHide={()=>setShowChat(prev=>!prev)} placement="end">
+          <Offcanvas.Header closeButton >
+            <Offcanvas.Title>Chat</Offcanvas.Title>
+          </Offcanvas.Header >
+          <Offcanvas.Body className="offB">
+         <div>
+         <div>
+        <div className=" h-100 d-flex flex-column justify-content-between align-self-end"
+          style={{
+            width: "100% ",
+            overflowY: "scroll",
+            scrollbarWidth: "thin",
+          }}
+        >
+          <div><ChatUserContainer /></div>
+          <ChatContainer />
+        </div>
+       
+      </div>
+         </div>
+          </Offcanvas.Body>
+        </Offcanvas>
+      )}
+      { 
+        <Offcanvas show={showPost} onHide={()=>setShowPost(prev=>!prev)} placement="start">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Post</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+          <form
+            className=" d-flex flex-column justify-cotent-center align-items-start"
+            action=""
+            onSubmit={sendPost}
+          >
+            <input
+              className="my-2 w-100"
+              type="text"
+              placeholder="Title"
+              value={title}
+              required="true"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              className="w-100"
+              type="text"
+              placeholder="Description"
+              value={description}
+              required="true"
+              onChange={(e) => setDescription(e.target.value)}
+            ></input>
+            <div className="w-100 d-flex my-2">
+              <input
+                ref={ref}
+                id="input"
+                className=" w-100"
+                type="file"
+                value={null}
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+            <button
+              className="btn btn-secondary"
+              style={{ borderRadius: "0px" }}
+            >
+              {!sendPostLoading ? (
+                "Post"
+              ) : (
+                <Spinner
+                  className="mx-3 h-1 spinner-border text-light"
+                  style={{ height: "20px", width: "20px" }}
+                />
+              )}
+            </button>
+          </form>
+          </Offcanvas.Body>
+        </Offcanvas>
+      }
       <div
-        className="  position-fixed end-0"
+        className=" home__chatConatainer position-fixed end-0"
         style={{ height: "-webkit-fill-available", width: "300px" }}
       >
         <div
@@ -194,12 +267,15 @@ const Home = () => {
         <div className="">
           {!isLoading &&
             posts?.length > 0 &&
-            posts?.slice(0).reverse().map((post) => (
-                <>  
-                <Posts post={post}/>
+            posts
+              ?.slice(0)
+              ?.reverse()
+              ?.slice(0, 7)
+              ?.map((post) => (
+                <>
+                  <Posts post={post} />
                 </>
               ))}
-           
         </div>
       </div>
     </>

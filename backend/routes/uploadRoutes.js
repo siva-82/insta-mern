@@ -6,6 +6,8 @@ const router = express.Router();
 import cloudinary from "../utils/cloudinary.js";
 import Post from "../models/postModel.js";
 import User from "../models/userModel.js";
+import generateToken from '../utils/generateToken.js';
+
 
 const storage = multer.diskStorage({
   // destination(req,file,cb){
@@ -118,7 +120,7 @@ let result
       }
     } catch (error) {
       console.log("catch");
-      console.log(error);
+      
     }
   });
 });
@@ -151,5 +153,46 @@ router.delete("/:id", async (req, res) => {
     }
 
 });
+router.post('/register',async(req,res)=>{
+  uploadSingleImage(req, res, async function (err) {
+  
+  const {name, email, password} =req.body;
 
+
+  try {
+    
+      const result = await cloudinary.uploader.upload(req.file.path);
+      const userExist = await User.findOne({email})
+       
+       if(userExist){
+           res.status(400);
+           throw new Error('User already exists' );
+       }
+   
+       const user= await User.create({
+           name,userName:name,email,password,
+           image: result.secure_url,
+        cloudinary_id: result.public_id,
+       })
+   
+       if(user){
+         generateToken(res,user._id)
+           res.status(201).json({
+               _id: user._id,
+               name: user.name,
+               userName:user.userName,
+               email:user.email
+           })
+       }else{
+           res.status(400)
+           throw new Error('Invalid user Data')
+       }
+  } catch (error) {
+    console.log("catch");
+      console.log(error);
+  }
+
+ 
+  });
+})
 export default router;

@@ -19,35 +19,19 @@ const Login = () => {
 
   const {userInfo,isLoadingUser} = useSelector((state)=>state.auth);
 
-  // useEffect(()=>{
-  //   if(userInfo){
-  //     console.log('useEffect'+'LOGINSCREEN'+'userInfo'+userInfo);
-      
-  //   }
-  // },[userInfo])
+
 
   const submitHandler=async (e)=> {
     e.preventDefault()
-    console.log('submitHandler'+'LOGINSCREEN');
-    
-    try {
+     try {
       const res = await login({email,password}).unwrap()
-      // console.log('submitHandler login res try'+email+password +userInfo);
-      // console.log(res)
-    
       if(res){
-        // console.log("if res setCredentials(...res)"+JSON.stringify(res))
-        // const ress= setCredentials(...res)
       dispatch(setCredentials(res))
-
-        // setCredentials(res)
-      //   console.log("resss"+ress)
-       
-      }
-      // dispatch(setCredentials(res))
+     }
+    
       navigate('/Home')
     } catch (err) {
-       console.log('submitHandler catch'+ err?.data?.message || err);
+       console.log(' catch'+ err?.data?.message || err);
     }
   }
 

@@ -9,19 +9,14 @@ import { useGetUsersQuery } from "../slices/usersApiSlice";
 const ChatUserContainer = () => {
   const { data: users, isError:usersErr, isLoading:usersLoading } = useGetUsersQuery() || {};
   const {userInfo,isLoadingUser} = useSelector((state)=>state.auth);
-
-  console.log(userInfo)
-  // const [users,setUsers]=useState(["6649f547c39c0fb7fd9c015c","664cb30368daa91ee2604156","6505df9ce542653ac739fcf8","6616679951b5b24cd741507a","664cb1e5e0e1279fcea7efd6"])
   const dispatch = useDispatch();
     
-  const handleSelect=()=>{
-    console.log(userInfo)
-  }
+
     const handleSelectUser=async (item)=>{
         
 if(userInfo){
   
-  console.log("users?.id",item._id)
+
 
   let newUser=item._id
   let loggedUser=userInfo._id
@@ -40,7 +35,7 @@ if(userInfo){
   reduced1 > reduced2
   ? loggedUser + newUser
   : newUser + loggedUser
-    console.log("combinedId",combinedId)
+    
 
 
 
@@ -67,7 +62,7 @@ if(userInfo){
  
 {users?.map((u)=>{
         return ( 
-         <> <div className='d-flex  justify-content-start align-items-center'> 
+         <> <div className='d-flex  justify-content-start align-items-center' style={{cursor:"pointer"}}> 
          <img className='me-2'src='./logo192.png' alt="" style={{height: "20px",    width: "20px" }} />
 
     <div  style={{margin:'15px 0  ',height:'20px',}} 

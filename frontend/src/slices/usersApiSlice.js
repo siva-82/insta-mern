@@ -6,13 +6,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
         getUsers:builder.query({
             query:()=>({
-                url: `${USERS_URL}/getUsers`, 
+                url: `${REACT_APP_BACKEND_URL}${USERS_URL}/getUsers`, 
                 method:'GET'
             })
         }),
         login: builder.mutation({
             query: (data)=>({
-                url:`${USERS_URL}/auth`,
+                url:`${REACT_APP_BACKEND_URL}${USERS_URL}/auth`,
                 method:'POST',
                 body:data,
 
@@ -20,20 +20,20 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         logout:builder.mutation({
             query:()=>({
-                url: `${USERS_URL}/logout`, 
+                url: `${REACT_APP_BACKEND_URL}${USERS_URL}/logout`, 
                 method:'POST'
             })
         }),
         register:builder.mutation({
             query:(data)=>({
-                url:`/api/upload/register`,
+                url:`${REACT_APP_BACKEND_URL}/api/upload/register`,
                 method:'POST',
                 body:data,
             })
         }),
         registerUser:builder.mutation({
             query:(data)=>({
-                url:`${USERS_URL}/`,
+                url:`${REACT_APP_BACKEND_URL}${USERS_URL}/`,
                 method:'POST',
                 body:data,
             })

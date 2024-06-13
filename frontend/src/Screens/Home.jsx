@@ -245,7 +245,7 @@ const Home = () => {
       }
       <div
         className=" home__chatConatainer position-fixed end-0"
-        style={{ height: "-webkit-fill-available", width: "300px" }}
+        style={{ height: "-webkit-fill-available", width: "300px",background:'white' }}
       >
         <div
           className=" h-100 d-flex flex-column justify-content-between align-self-end"

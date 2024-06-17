@@ -38,7 +38,15 @@ const ChatContainer = () => {
 
 
   const refScroll = useRef();
-
+  
+  const getDate=(value)=>{
+    const fireBaseTime = new Date(
+      value.seconds * 1000 + value.nanoseconds / 1000000,
+    );
+    const date = fireBaseTime.toDateString();
+    const atTime = fireBaseTime.toLocaleTimeString([],{ timeStyle: 'short' });
+   return atTime
+  }
 
   useEffect(() => {
     const uns = () => {

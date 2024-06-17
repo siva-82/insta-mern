@@ -131,7 +131,7 @@
   position: relative;
   padding: 5px;
   border-Radius:  10px 10px 10px 0px;
-  background-color: #D3D3D3;
+  background-color: lightslategrey;
 
 }
 
@@ -155,7 +155,7 @@
     top: 100%;
     height: 7px;
     width: 8px;
-    background: linear-gradient(135deg,#D3D3D3 0%,#D3D3D3 50%,transparent 50%,transparent);
+    background: linear-gradient(135deg,lightslategrey 0%, lightslategrey 50%,transparent 50%,transparent);
 
 }
 .otherUser__chatMessageTime{

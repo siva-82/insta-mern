@@ -175,22 +175,20 @@ const ChatContainer = () => {
         <>
           <div
             ref={refScroll}
-            className={`d-flex w-100 flex-column  align-items-${
+            className={`d-flex w-100 flex-column my-2 align-items-${
               message.senderId == currentUser?._id ? "end" : "start"
             }`}
           >
             <p
-              style={{
-                color: "white",
-                padding: "5px",
-                borderRadius: "5px",
-                background: `${
-                  message.senderId == currentUser?._id ? "blue" : "red"
-                }`,
-              }}
+            className={`${
+                  message.senderId == currentUser?._id ? "currentUser__chat" : "otherUser__chat"
+                }`}
+                style={{padding: "5px"}}
             >
               {message.text}
             </p>
+            <div className={`text-muted ${message.senderId == currentUser?._id ? "currentUser__chatMessageTime":"otherUser__chatMessageTime"}`}>{getDate(message.date)}</div>
+
           </div>
         </>
       );

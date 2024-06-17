@@ -119,6 +119,57 @@
 .offB {
   padding-top: 0px;
 }
+.currentUser__chat{
+  color: white;
+  position: relative;
+  padding: 5px;
+  border-Radius: 10px 10px  0px 10px;
+  background-color: darkslategrey;
+}
+.otherUser__chat{
+  color: white;
+  position: relative;
+  padding: 5px;
+  border-Radius:  10px 10px 10px 0px;
+  background-color: #D3D3D3;
+
+}
+
+.currentUser__chat::after{
+
+  content:'';
+  position: absolute;
+  background-color: darkslategrey;
+  right: 0;
+  top: 100%;
+  height: 7px;
+  width: 8px;
+  background: linear-gradient(220deg,darkslategrey 0%,darkslategrey 50%,transparent 50%,transparent);
+}
+.otherUser__chat::after{
+
+    content:'';
+    position: absolute;
+    background-color:#D3D3D3    ;
+    left: 0;
+    top: 100%;
+    height: 7px;
+    width: 8px;
+    background: linear-gradient(135deg,#D3D3D3 0%,#D3D3D3 50%,transparent 50%,transparent);
+
+}
+.otherUser__chatMessageTime{
+  font-size: 10px;
+  margin-top: -12px;
+  margin-left: 10px;
+}
+.currentUser__chatMessageTime{
+  font-size: 10px;
+  margin-top: -12px;
+  margin-right: 10px;
+
+}
+
   @media (max-width:480px){
     .nav__postContainer{
       display: none;

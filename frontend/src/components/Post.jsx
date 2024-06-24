@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import '../Screens/Home.css'
+import "../Screens/Home.css";
 import { useDeletePostMutation } from "../slices/postSlice";
 import { useSendCommentMutation } from "../slices/postSlice";
 import Confirm from "./utils/Confirm";
@@ -71,7 +71,7 @@ const Post = ({ post }) => {
           deletePostHandler={deletePostHandler}
         />
       )}
-      
+
       <div className=" ">
         <div className="post__nameField">
           <div className="post__avatarName">
@@ -92,7 +92,11 @@ const Post = ({ post }) => {
                 value={post}
                 onClick={() => deleteHandler(post._id)}
               >
-                {!deletePostLoading ? "Delete":(<div class="deleting">...</div>)}
+                {!deletePostLoading ? (
+                  "Delete"
+                ) : (
+                  <div class="deleting">...</div>
+                )}
               </div>
             </div>
           )}

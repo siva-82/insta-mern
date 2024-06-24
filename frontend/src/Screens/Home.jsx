@@ -31,10 +31,8 @@ const Home = () => {
   const [description, setDescription] = useState();
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
-  const [showPost,setShowPost]=useState(false)
-  const [showChat,setShowChat]=useState(false)
-
- 
+  const [showPost, setShowPost] = useState(false);
+  const [showChat, setShowChat] = useState(false);
 
   const logoutHandler = async () => {
     console.log("logoutHandler");
@@ -77,10 +75,24 @@ const Home = () => {
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
-        {<div className="nav__buttons d-flex align-items-center">
-          <button className="btn btn-secondary mx-2" style={{paddingTop:"0px",paddingBottom:"0px"}} onClick={()=>setShowPost(prev=>!prev)}>Post</button>
-          <button className="btn btn-secondary" style={{paddingTop:"0px",paddingBottom:"0px"}} onClick={()=>setShowChat(prev=>!prev)}>Chat</button>
-          </div>}
+        {
+          <div className="nav__buttons d-flex align-items-center">
+            <button
+              className="btn btn-secondary mx-2"
+              style={{ paddingTop: "0px", paddingBottom: "0px" }}
+              onClick={() => setShowPost((prev) => !prev)}
+            >
+              Post
+            </button>
+            <button
+              className="btn btn-secondary"
+              style={{ paddingTop: "0px", paddingBottom: "0px" }}
+              onClick={() => setShowChat((prev) => !prev)}
+            >
+              Chat
+            </button>
+          </div>
+        }
         <div className="nav__postContainer" style={{}}>
           <form
             className="d-flex justify-cotent-center align-items-center"
@@ -152,114 +164,124 @@ const Home = () => {
           </div>
         )}
       </div>
-      { (
-        <Offcanvas show={showChat} onHide={()=>setShowChat(prev=>!prev)} placement="end">
-          <Offcanvas.Header closeButton >
-            <Offcanvas.Title>Chat</Offcanvas.Title>
-          </Offcanvas.Header >
-          <Offcanvas.Body className="offB">
-         <div>
-         <div>
-        <div className=" h-100 d-flex flex-column justify-content-between align-self-end"
-          style={{
-            width: "100% ",
-            overflowY: "scroll",
-            scrollbarWidth: "thin",
-          }}
+      {
+        <Offcanvas
+          show={showChat}
+          onHide={() => setShowChat((prev) => !prev)}
+          placement="end"
         >
-          <div><ChatUserContainer /></div>
-          <ChatContainer />
-        </div>
-       
-      </div>
-         </div>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Chat</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body className="offB">
+            <div>
+              <div>
+                <div
+                  className=" h-100 d-flex flex-column justify-content-between align-self-end"
+                  style={{
+                    width: "100% ",
+                    overflowY: "scroll",
+                    scrollbarWidth: "thin",
+                  }}
+                >
+                  <div>
+                    <ChatUserContainer />
+                  </div>
+                  <ChatContainer />
+                </div>
+              </div>
+            </div>
           </Offcanvas.Body>
         </Offcanvas>
-      )}
-      { 
-        <Offcanvas show={showPost} onHide={()=>setShowPost(prev=>!prev)} placement="start">
+      }
+      {
+        <Offcanvas
+          show={showPost}
+          onHide={() => setShowPost((prev) => !prev)}
+          placement="start"
+        >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Post</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-          <form
-            className=" d-flex flex-column justify-cotent-center align-items-start"
-            action=""
-            onSubmit={sendPost}
-          >
-            <input
-              className="my-2 w-100"
-              type="text"
-              placeholder="Title"
-              value={title}
-              required="true"
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <input
-              className="w-100"
-              type="text"
-              placeholder="Description"
-              value={description}
-              required="true"
-              onChange={(e) => setDescription(e.target.value)}
-            ></input>
-            <div className="w-100 d-flex my-2">
-              <input
-                ref={ref}
-                id="input"
-                className=" w-100"
-                type="file"
-                value={null}
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-            </div>
-            <button
-              className="btn btn-secondary"
-              style={{ borderRadius: "0px" }}
+            <form
+              className=" d-flex flex-column justify-cotent-center align-items-start"
+              action=""
+              onSubmit={sendPost}
             >
-              {!sendPostLoading ? (
-                "Post"
-              ) : (
-                <Spinner
-                  className="mx-3 h-1 spinner-border text-light"
-                  style={{ height: "20px", width: "20px" }}
+              <input
+                className="my-2 w-100"
+                type="text"
+                placeholder="Title"
+                value={title}
+                required="true"
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <input
+                className="w-100"
+                type="text"
+                placeholder="Description"
+                value={description}
+                required="true"
+                onChange={(e) => setDescription(e.target.value)}
+              ></input>
+              <div className="w-100 d-flex my-2">
+                <input
+                  ref={ref}
+                  id="input"
+                  className=" w-100"
+                  type="file"
+                  value={null}
+                  onChange={(e) => setImage(e.target.files[0])}
                 />
-              )}
-            </button>
-          </form>
+              </div>
+              <button
+                className="btn btn-secondary"
+                style={{ borderRadius: "0px" }}
+              >
+                {!sendPostLoading ? (
+                  "Post"
+                ) : (
+                  <Spinner
+                    className="mx-3 h-1 spinner-border text-light"
+                    style={{ height: "20px", width: "20px" }}
+                  />
+                )}
+              </button>
+            </form>
           </Offcanvas.Body>
         </Offcanvas>
       }
-      {!isLoading && 
-      <div
-      className=" home__chatConatainer position-fixed end-0"
-      style={{ height: "-webkit-fill-available", width: "300px",background:'white' }}
-    >
-      <div
-        className=" h-100 d-flex flex-column justify-content-between align-self-end"
-        style={{
-          borderLeft: "1px solid lightgray",
-          width: "100% ",
-          overflowY: "scroll",
-          scrollbarWidth: "thin",
-        }}
-      >
-        <div>
-          <ChatUserContainer />
+      {!isLoading && (
+        <div
+          className=" home__chatConatainer position-fixed end-0"
+          style={{
+            height: "-webkit-fill-available",
+            width: "300px",
+            background: "white",
+          }}
+        >
+          <div
+            className=" h-100 d-flex flex-column justify-content-between align-self-end"
+            style={{
+              borderLeft: "1px solid lightgray",
+              width: "100% ",
+              overflowY: "scroll",
+              scrollbarWidth: "thin",
+            }}
+          >
+            <div>
+              <ChatUserContainer />
+            </div>
+            <ChatContainer />
+          </div>
         </div>
-        <ChatContainer />
-      </div>
-    </div>
-
-
-      }
-      
+      )}
 
       <div className="">
         <div className="">
-          {!isLoading &&
-            posts?.length > 0 ?
-           ( posts
+          {!isLoading && posts?.length > 0 ? (
+            posts
               ?.slice(0)
               ?.reverse()
               ?.slice(0, 7)
@@ -267,8 +289,13 @@ const Home = () => {
                 <>
                   <Posts post={post} />
                 </>
-              ))):(<Spinner  className="mx-3 h-1 spinner-grow text-light"
-                style={{ height: "20px", width: "20px" }}/>)}
+              ))
+          ) : (
+            <Spinner
+              className="mx-3 h-1 spinner-grow text-light"
+              style={{ height: "20px", width: "20px" }}
+            />
+          )}
         </div>
       </div>
     </>

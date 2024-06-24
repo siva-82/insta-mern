@@ -36,19 +36,6 @@ const Home = () => {
 
  
 
-  // useEffect(() => {
-  //   db.collection('posts')
-  //     .orderBy('timestamp', 'desc')
-  //     .onSnapshot((snapshot) => {
-  //       setPsts(
-  //         snapshot.docs.map((doc) => ({
-  //           id: doc.id,
-  //           post: doc.data(),
-  //         }))
-  //       );
-  //     });
-  // }, []);
-
   const logoutHandler = async () => {
     console.log("logoutHandler");
     try {
@@ -243,31 +230,36 @@ const Home = () => {
           </Offcanvas.Body>
         </Offcanvas>
       }
+      {!isLoading && 
       <div
-        className=" home__chatConatainer position-fixed end-0"
-        style={{ height: "-webkit-fill-available", width: "300px",background:'white' }}
+      className=" home__chatConatainer position-fixed end-0"
+      style={{ height: "-webkit-fill-available", width: "300px",background:'white' }}
+    >
+      <div
+        className=" h-100 d-flex flex-column justify-content-between align-self-end"
+        style={{
+          borderLeft: "1px solid lightgray",
+          width: "100% ",
+          overflowY: "scroll",
+          scrollbarWidth: "thin",
+        }}
       >
-        <div
-          className=" h-100 d-flex flex-column justify-content-between align-self-end"
-          style={{
-            borderLeft: "1px solid lightgray",
-            width: "100% ",
-            overflowY: "scroll",
-            scrollbarWidth: "thin",
-          }}
-        >
-          <div>
-            <ChatUserContainer />
-          </div>
-          <ChatContainer />
+        <div>
+          <ChatUserContainer />
         </div>
+        <ChatContainer />
       </div>
+    </div>
+
+
+      }
+      
 
       <div className="">
         <div className="">
           {!isLoading &&
-            posts?.length > 0 &&
-            posts
+            posts?.length > 0 ?
+           ( posts
               ?.slice(0)
               ?.reverse()
               ?.slice(0, 7)
@@ -275,7 +267,8 @@ const Home = () => {
                 <>
                   <Posts post={post} />
                 </>
-              ))}
+              ))):(<Spinner  className="mx-3 h-1 spinner-grow text-light"
+                style={{ height: "20px", width: "20px" }}/>)}
         </div>
       </div>
     </>

@@ -118,7 +118,7 @@ const Post = ({ post }) => {
             onSubmit={handleComment}
           >
             <input
-              style={{ width: "-webkit-fill-available" }}
+              style={{ width: "100%" }}
               className="me-2"
               type="text"
               placeholder="Comment"

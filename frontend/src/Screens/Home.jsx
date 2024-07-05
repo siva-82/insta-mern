@@ -252,7 +252,7 @@ const Home = () => {
           </Offcanvas.Body>
         </Offcanvas>
       }
-      {!isLoading && (
+      { !isLoading   && posts?.length > 0 &&(
         <div
           className=" home__chatConatainer position-fixed end-0"
           style={{
@@ -292,8 +292,8 @@ const Home = () => {
               ))
           ) : (
             <Spinner
-              className="mx-3 h-1 spinner-grow text-light"
-              style={{ height: "20px", width: "20px" }}
+              className="mx-3 h-1 spinner-border"
+              style={{ height: "20px", width: "20px", position:' absolute',right:" 50%", top: '50%' }}
             />
           )}
         </div>
